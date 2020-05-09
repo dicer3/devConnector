@@ -16,7 +16,7 @@ export const Register = (props) => {
 
     const onChange = e => setFormData({ ...formData, [e.target.name]: e.target.value })
 
-    const onSubmit = async e => {
+    const onSubmit = e => {
         e.preventDefault();
         if (password !== password2) {
             props.makeAlert('Passwords do not match', 'danger');
