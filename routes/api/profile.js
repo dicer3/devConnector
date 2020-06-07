@@ -7,6 +7,7 @@ const { check, validationResult } = require("express-validator");
 
 const Profile = require("../../models/profile");
 const User = require("../../models/user");
+const Post = require("../../models/post");
 
 // @route   GET api/profile/me
 // @desc    Get current users profile
@@ -74,9 +75,9 @@ router.post(
     profileFields.social = {};
     if (youtube) profileFields.social.youtube = youtube;
     if (twitter) profileFields.social.twitter = twitter;
-    if (youtube) profileFields.social.facebook = facebook;
+    if (facebook) profileFields.social.facebook = facebook;
     if (youtube) profileFields.social.linkedin = linkedin;
-    if (youtube) profileFields.social.instagram = instagram;
+    if (instagram) profileFields.social.instagram = instagram;
 
     try {
       let profile = await Profile.findOne({ user: req.user.id });
@@ -138,8 +139,8 @@ router.get("/user/:user_id", async (req, res) => {
 // @access  Private
 router.delete("/", auth, async (req, res) => {
   try {
-    //@todo - remove users posts
-
+    // Remove user posts
+    await Post.deleteMany({ user: req.user.id });
     //Remove profile
     await Profile.findOneAndRemove({ user: req.user.id });
     //Remove user
@@ -168,7 +169,7 @@ router.put(
   async (req, res) => {
     const errors = validationResult(req);
     if (!errors.isEmpty())
-      return res.status(400).json({ errrors: errors.array() });
+      return res.status(400).json({ errors: errors.array() });
     const {
       title,
       company,
@@ -242,8 +243,11 @@ router.put(
   ],
   async (req, res) => {
     const errors = validationResult(req);
-    if (!errors.isEmpty())
-      return res.status(400).json({ errrors: errors.array() });
+    if (!errors.isEmpty()) {
+      console.log("arrived here");
+
+      return res.status(400).json({ errors: errors.array() });
+    }
     const {
       school,
       degree,
