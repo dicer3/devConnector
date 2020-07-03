@@ -1,5 +1,4 @@
 import React, { useState, Fragment, useEffect } from "react";
-import { Link, withRouter } from "react-router-dom";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { createProfile, getCurrentProfile } from "../../actions/profile";
@@ -29,7 +28,6 @@ const EditProfile = ({
 
   useEffect(() => {
     getUserCurrentProfile();
-    console.log(profile);
     setFormData({
       company: loading || !profile.company ? "" : profile.company,
       website: loading || !profile.website ? "" : profile.website,
@@ -39,13 +37,13 @@ const EditProfile = ({
       githubusername:
         loading || !profile.githubusername ? "" : profile.githubusername,
       bio: loading || !profile.bio ? "" : profile.bio,
-      twitter: loading || !profile.socail ? "" : profile.socail.twitter,
-      facebook: loading || !profile.socail ? "" : profile.socail.facebook,
-      linkedin: loading || !profile.socail ? "" : profile.socail.linkedin,
-      youtube: loading || !profile.socail ? "" : profile.socail.youtube,
-      instagram: loading || !profile.socail ? "" : profile.socail.instagram,
+      twitter: loading || !profile.social ? "" : profile.social.twitter,
+      facebook: loading || !profile.social ? "" : profile.social.facebook,
+      linkedin: loading || !profile.social ? "" : profile.social.linkedin,
+      youtube: loading || !profile.social ? "" : profile.social.youtube,
+      instagram: loading || !profile.social ? "" : profile.social.instagram,
     });
-  }, [loading]);
+  }, [loading, getUserCurrentProfile]);
 
   const {
     company,
@@ -189,7 +187,7 @@ const EditProfile = ({
                 onChange={(e) => onChange(e)}
               />
             </div>
-
+            twitter {twitter}
             <div className='form-group social-input'>
               <i className='fab fa-facebook fa-2x'></i>
               <input
@@ -200,7 +198,6 @@ const EditProfile = ({
                 onChange={(e) => onChange(e)}
               />
             </div>
-
             <div className='form-group social-input'>
               <i className='fab fa-youtube fa-2x'></i>
               <input
@@ -211,7 +208,6 @@ const EditProfile = ({
                 onChange={(e) => onChange(e)}
               />
             </div>
-
             <div className='form-group social-input'>
               <i className='fab fa-linkedin fa-2x'></i>
               <input
@@ -222,7 +218,6 @@ const EditProfile = ({
                 onChange={(e) => onChange(e)}
               />
             </div>
-
             <div className='form-group social-input'>
               <i className='fab fa-instagram fa-2x'></i>
               <input
@@ -258,7 +253,4 @@ const mapDispatchToProps = (dispatch) => ({
   getUserCurrentProfile: () => dispatch(getCurrentProfile()),
 });
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(withRouter(EditProfile));
+export default connect(mapStateToProps, mapDispatchToProps)(EditProfile);

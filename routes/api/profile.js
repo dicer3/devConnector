@@ -76,7 +76,7 @@ router.post(
     if (youtube) profileFields.social.youtube = youtube;
     if (twitter) profileFields.social.twitter = twitter;
     if (facebook) profileFields.social.facebook = facebook;
-    if (youtube) profileFields.social.linkedin = linkedin;
+    if (linkedin) profileFields.social.linkedin = linkedin;
     if (instagram) profileFields.social.instagram = instagram;
 
     try {
@@ -327,7 +327,6 @@ router.get("/github/:username", (req, res) => {
       if (response.statusCode !== 200) {
         return res.status(404).json({ msg: "NO Github profile found" });
       }
-
       res.json(JSON.parse(body));
     });
   } catch (err) {

@@ -1,5 +1,4 @@
 import React, { useState, Fragment } from "react";
-import { Link, withRouter } from "react-router-dom";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { createProfile } from "../../actions/profile";
@@ -227,4 +226,4 @@ const mapDispatchToProps = (dispatch) => ({
     dispatch(createProfile(FormData, history, edit)),
 });
 
-export default connect(null, mapDispatchToProps)(withRouter(CreateProfile));
+export default connect(null, mapDispatchToProps)(CreateProfile);
