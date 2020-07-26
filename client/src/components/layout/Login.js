@@ -15,7 +15,6 @@ export const Login = (props) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
 
   const onSubmit = async (e) => {
-    console.log(email, " ", password);
     e.preventDefault();
     props.makeLogin(email, password);
   };
