@@ -7,7 +7,7 @@ const ProfileExperience = ({
 }) => {
   return (
     <div>
-      <h3 className='text-dark'>Company</h3>
+      <h3 className='text-dark'>{company}</h3>
       <p>
         <Moment format='YYYY/MM/DD'>{from}</Moment> -{" "}
         {!to ? "Now" : <Moment format='YYYY/MM/DD'>{to}</Moment>}
@@ -15,6 +15,10 @@ const ProfileExperience = ({
       <p>
         <strong>Position: </strong>
         {title}
+      </p>
+      <p>
+        <strong>Location: </strong>
+        {location}
       </p>
       {description && (
         <p>
